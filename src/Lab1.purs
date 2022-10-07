@@ -25,19 +25,13 @@ snoc xs x = reverse ( x :(reverse xs))
 length :: forall a. List a -> Int
 length = foldl (\n _ -> n + 1) 0
 
-
-tail :: forall a. List a -> Maybe (List a)
-tail Nil = Nothing
-tail (_ : xs) = Just xs
-
-
 test :: Effect Unit
 test = do
   log $ show $ singleton ("v")
   log $ show $ null (1 : Nil)
   log $ show $ snoc ("2": "7" : Nil) ("1") 
   log $ show $ length (2 : 1 : Nil) 
-  log $ show $ tail (2 : 1 : Nil) 
+  
   
   
  
