@@ -2,7 +2,6 @@ module Lab1 where
 
 import Prelude
 import Data.List (List(..), reverse)
-import Data.Maybe(Maybe(..))
 import Data.Foldable (foldl)
 
 import Effect (Effect)
