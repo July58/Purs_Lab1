@@ -1,13 +1,15 @@
 module Lab1 where
 
-import Prelude hiding(flip)
-import Data.List (List(..))
-import Data.Foldable (foldr, foldl)
+import Prelude
+import Data.List (List(..), reverse)
+import Data.Maybe(Maybe(..))
+import Data.Foldable (foldl)
 
 import Effect (Effect)
 import Effect.Console (log)
 
 infixr 6 Cons as :
+
 
 singleton :: forall a. a -> List a
 singleton x = x : Nil
@@ -17,14 +19,25 @@ null Nil = true
 null _ = false
 
 snoc :: forall a. List a -> a -> List a
-snoc xs x = foldr (:) (x: Nil) xs
+snoc xs x = reverse ( x :(reverse xs))
+
 
 length :: forall a. List a -> Int
 length = foldl (\n _ -> n + 1) 0
+
+
+tail :: forall a. List a -> Maybe (List a)
+tail Nil = Nothing
+tail (_ : xs) = Just xs
+
 
 test :: Effect Unit
 test = do
   log $ show $ singleton ("v")
   log $ show $ null (1 : Nil)
-  log $ show $ snoc ("2": Nil) ("1") 
+  log $ show $ snoc ("2": "7" : Nil) ("1") 
   log $ show $ length (2 : 1 : Nil) 
+  log $ show $ tail (2 : 1 : Nil) 
+  
+  
+ 
